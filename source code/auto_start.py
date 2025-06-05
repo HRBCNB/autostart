@@ -51,6 +51,9 @@ def click_coordinates(coordinates):
 
 if __name__ == "__main__":
     # 关闭原神与BetterGI进程
+    print('尝试关闭微星小飞机进程')
+    find_and_kill_process('MSIAfterburner')
+
     print('尝试关闭原神与BetterGI进程')
     find_and_kill_process('yuanshen')
     find_and_kill_process('bettergi')
