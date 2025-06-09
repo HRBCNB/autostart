@@ -4,6 +4,19 @@ import pyautogui
 import psutil
 import os
 import sys
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+
+def mute_default_speaker(mute=True):
+    """
+    静音或取消静音默认扬声器
+    :param mute: True 静音，False 取消静音
+    """
+    devices = AudioUtilities.GetSpeakers()
+    interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+    volume = cast(interface, POINTER(IAudioEndpointVolume))
+    volume.SetMute(1 if mute else 0, None)
 
 
 def find_and_kill_process(process_name):
@@ -50,10 +63,12 @@ def click_coordinates(coordinates):
 
 
 if __name__ == "__main__":
-    # 关闭原神与BetterGI进程
+    #静音
+    mute_default_speaker(True)
+    #关闭小飞机
     print('尝试关闭微星小飞机进程')
     find_and_kill_process('MSIAfterburner')
-
+    # 关闭原神与BetterGI进程
     print('尝试关闭原神与BetterGI进程')
     find_and_kill_process('yuanshen')
     find_and_kill_process('bettergi')
@@ -75,3 +90,6 @@ if __name__ == "__main__":
 
     # 执行点击操作
     click_coordinates(coords)
+
+    #pyinstaller --onefile mute_speaker.py
+
