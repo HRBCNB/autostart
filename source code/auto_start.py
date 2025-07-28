@@ -73,6 +73,9 @@ if __name__ == "__main__":
     find_and_kill_process('yuanshen')
     find_and_kill_process('bettergi')
 
+    #关闭Snipaste截图程序
+    find_and_kill_process('Snipaste')
+
     # 获取当前脚本或exe文件所在目录，保证能正确读取config.txt
     base_dir = os.path.dirname(sys.executable if getattr(
         sys, 'frozen', False) else __file__)
@@ -91,5 +94,5 @@ if __name__ == "__main__":
     # 执行点击操作
     click_coordinates(coords)
 
-    #pyinstaller --onefile mute_speaker.py
+    #pyinstaller --onefile auto_start.py
 

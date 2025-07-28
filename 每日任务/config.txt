@@ -10,4 +10,4 @@ D:\Program Files\BetterGI\BetterGI.exe
 1254,332
 
 #启动
-718,227
+835,243
