@@ -7,6 +7,15 @@ import sys
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
+import win32com.client
+import time
+
+def show_desktop():
+    """
+    最小化所有窗口，显示桌面
+    """
+    shell = win32com.client.Dispatch("Shell.Application")
+    shell.MinimizeAll()
 
 def mute_default_speaker(mute=True):
     """
@@ -63,11 +72,19 @@ def click_coordinates(coordinates):
 
 
 if __name__ == "__main__":
-    #静音
+    #显示桌面
+    print("正在最小化所有窗口...")
+    time.sleep(1)  # 可以延迟1秒，看效果
+    show_desktop()
+    print("已显示桌面！")
+
+     #静音
     mute_default_speaker(True)
+
     #关闭小飞机
     print('尝试关闭微星小飞机进程')
     find_and_kill_process('MSIAfterburner')
+
     # 关闭原神与BetterGI进程
     print('尝试关闭原神与BetterGI进程')
     find_and_kill_process('yuanshen')
